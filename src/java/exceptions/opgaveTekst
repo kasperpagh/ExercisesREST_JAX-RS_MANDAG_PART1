@@ -1,0 +1,10 @@
+Opgave A
+opg. 9: Grunden til at vi skal sende http statuskoden med, er at den da automatisk bliver included i en httpheader i en kontekst der ser ca sådan her ud:
+
+    Request URL:http://localhost:8084/ExercisesREST_JAX-RS_MANDAG_PART1_DONE/api/quote/13
+    Request Method:GET
+    Status Code:404 Not Found
+    Remote Address:[::1]:8084
+
+Det kan være rart for folk, der skal bruge vores api, at se hvordan deres request er gået,
+uden at behøve at dykke ind i selve "dataen" (såsom at se et Json objekt igennem efter om en af dens fields er en 400+ kode) der er sendt med requestet.

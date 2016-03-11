@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <title>Edit, delete and create quotes!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="createBox">
+            <form id="createForm">
+                <input type="text" id="quoteField" value="skriv quoten her!">
+                <input type="text" id="bubber" value="angiv map key her!">
+                <button id="createField">klik for at lave quote</button>
+                <button id="putField">klik her for at redigerer</button>
+                <button id="delField">klik her for at slette</button>
+            </form>
+        </div>
+        <div id="statusBox" style="background-color: orange">
+            <p>Her kommer status!</p>
+        </div>
+
+        <script>
+            $(document).ready(function ()
+            {
+                var creator = function ()
+                {
+                    console.log("i start af creator!");
+                    var tekst = $("#quoteField").val();
+
+                    var llama = parseInt($("#bubber").val());
+
+                    var quote =
+                            {
+                                quote: tekst,
+                                key: llama
+                            };
+                    console.log("val af quote og key: " + quote.quote + "  " + quote.key);
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://localhost:8084/ExercisesREST_JAX-RS_MANDAG/api/quote/";
+                    xmlhttp.open("POST", url, true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                    xmlhttp.send(JSON.stringify(quote));
+
+                    $("#statusBox").html("<p>Din ny quote er gemt!</p>");
+
+                };
+                $("#createField").click(function ()
+                {
+                    $("#createForm").submit(function (e)
+                    {
+                        e.preventDefault();
+                    });
+                    creator();
+                });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                var putter = function ()
+                {
+                    var tekst = $("#quoteField").val();
+                    var llama = parseInt($("#bubber").val());
+                    var quote =
+                            {
+                                quote: tekst,
+                                key: llama
+                            };
+                    console.log("val af quote og key: " + quote.quote + "  " + quote.key);
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://localhost:8084/ExercisesREST_JAX-RS_MANDAG/api/quote/";
+                    console.log("Her er full put url: " + url);
+                    xmlhttp.open("PUT", url, true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                    xmlhttp.send(JSON.stringify(quote));
+                    $("#statusBox").html("<p>Din quote er opdateret!</p>");
+                };
+                $("#putField").click(function ()
+                {
+                    $("#createForm").submit(function (e)
+                    {
+                        e.preventDefault();
+                    });
+                    putter();
+                });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                var deleter = function ()
+                {
+                    var tekst = $("#quoteField").val();
+                    var llama = parseInt($("#bubber").val());
+                    var quote =
+                            {
+                                quote: tekst,
+                                key: llama
+                            };
+                    console.log("val af quote og key: " + quote.quote + "  " + quote.key);
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://localhost:8084/ExercisesREST_JAX-RS_MANDAG/api/quote/" + llama;
+                    console.log("Her er full put url: " + url);
+                    xmlhttp.open("DELETE", url, true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                    xmlhttp.send(JSON.stringify(quote));
+                    $("#statusBox").html("<p>Din quote er slettet!</p>");
+                };
+                $("#delField").click(function ()
+                {
+                    $("#createForm").submit(function (e)
+                    {
+                        e.preventDefault();
+                    });
+                    deleter();
+                });
+
+            });
+        </script>
+    </body>
+</html>

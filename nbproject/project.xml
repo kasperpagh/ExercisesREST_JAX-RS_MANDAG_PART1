@@ -6,15 +6,15 @@
             <extension file="rest-build.xml" id="rest.5"/>
         </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
-            <name>ExercisesREST_JAX-RS_MANDAG</name>
+            <name>ExercisesREST_JAX-RS_MANDAG_PART1_DONE</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
                 <library dirs="200">
-                    <file>${file.reference.gson-2.6.2.jar}</file>
+                    <file>${libs.restapi.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.restapi.classpath}</file>
+                    <file>${file.reference.gson-2.6.2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">

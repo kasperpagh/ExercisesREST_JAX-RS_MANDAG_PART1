@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+ 
+        <form action="/RDServlet" method="POST">
+            <input type="button" value="Klik her for admin siden">
+        </form>
+        <div>Quote of the day!</div>
+        <div id="johnBox">
+        </div>
+
+        <button id="nyQuote">Klik her for nyt citat!</button>
+        <script>
+            $(document).ready(function () {
+                var findRandomQuote = function ()
+                {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://localhost:8084/ExercisesREST_JAX-RS_MANDAG/api/quote/random";
+                    xmlhttp.onreadystatechange = function ()
+                    {
+                        console.log("state change er sket!");
+                        var myQuote = JSON.parse(xmlhttp.responseText);
+                        console.log("her er myQuote: " + myQuote.quote);
+                        $("#johnBox").html(myQuote.quote);
+                    };
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                };
+                findRandomQuote();
+                $("#nyQuote").click(function ()
+                {
+                    findRandomQuote();
+                });
+            });
+        </script>
+
+    </body>
+</html>
